@@ -1,5 +1,6 @@
 # Bitacora-F2003B
-Bitacora de la materia de sistemas fisicos deterministicos
+Bitacora de la materia de sistemas fisicos deterministicos.
+Para el registro de las actividades realizadas por el equipo y mantener un registro. 
 
 # Integrantes
 Jocelyn Janet Parés Ramos
