@@ -1,5 +1,5 @@
 # Bitacora-F2003B
-Bitacora de la materia de 
+Bitacora de la materia de sistemas fisicos deterministicos, 
 
 # Integrantes
 Jocelyn Janet Parés Ramos
