@@ -4,31 +4,24 @@ Bitacora de la materia de
 # Integrantes
 
 # Instrucciones para cada entrada
-Cada entrada es un archivo de Markdown con la fecha indicada en el nombre del archivo. 
+## Formato
+Cada entrada es un archivo de Markdown con la fecha indicada en el nombre del archivo. Markdown es un lenguaje de marcado que permite formatear rápidamente un documento de texto, de forma similar a HTML o a LaTeX. Es el mismo que utiliza jupyter en las celdas de texto. Puedes escribir Markdown en un editor de texto, o incluso exportar un archivo .ipynb. 
 
-    Markdown es un lenguaje de marcado que permite formatear rápidamente un documento de texto, de forma similar a HTML o a LaTeX. Es el mismo que utiliza jupyter en las celdas de texto. 
-    Puedes escribir Markdown en un editor de texto, o incluso exportar un archivo .ipynb. 
-
-Cada sesión de trabajo, dentro o fuera del salón de clases debe formar una entrada en la  bitácora. 
-
-    La recomendación es que dediquen 10 minutos al final de la sesión para llenar la bitácora. Esto servirá para pensar de forma organizada en las conclusiones obtenidas. 
+## Entradas
+Cada sesión de trabajo, dentro o fuera del salón de clases debe formar una entrada en la  bitácora. La recomendación es que dediquen 10 minutos al final de la sesión para llenar la bitácora. Esto servirá para pensar de forma organizada en las conclusiones obtenidas. 
 
 Las entradas deben ser concisas y seguir el método científico. Se debe responder a las siguientes preguntas (20% por pregunta)
-
-    ¿Que hiciste?
-    ¿Que encontraste? (Incluye alguna evidencia)
-    ¿Que pensaste?
-    ¿Es lo que esperabas?
-    ¿Por qué si? O ¿Por qué no?
+- ¿Que hiciste?
+- ¿Que encontraste? (Incluye alguna evidencia)
+- ¿Que pensaste?
+- ¿Es lo que esperabas?
+- ¿Por qué si? O ¿Por qué no?
 
 Finalmente, las entradas deben incluir los nombres de quienes estaban presentes en esa sesión de trabajo. 
 
-    No pasa nada si no están todas las personas en todas las sesiones de trabajo. Eso es normal. Pero las bitácoras pueden servir como evidencia en caso de que haya personas que no estén contribuyendo al equipo de manera significativa. 
+> No pasa nada si no están todas las personas en todas las sesiones de trabajo. Eso es normal. Pero las bitácoras pueden servir como evidencia en caso de que haya personas que no estén contribuyendo al equipo de manera significativa. 
 
-Sequencialidad 
+## Sequencialidad 
 Una bitácora debe ser secuencial. Esto es importante para mantener la organización, pero también para que funcione como documento legal.  Todas las entradas que no cumplan con los siguientes puntos no se tomarán en cuenta. 
-
-    Todas las entradas son secuenciales, y no se editaron después de la fecha indicada.
-    Todas las entradas son generadas no más de un día después de la actividad.
-
-
+- Todas las entradas son secuenciales, y no se editaron después de la fecha indicada.
+- Todas las entradas son generadas no más de un día después de la actividad.
