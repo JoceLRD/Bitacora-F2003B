@@ -1,6 +1,6 @@
 # Bitacora-F2003B
 Bitacora de la materia de sistemas fisicos deterministicos.
-Para el mostar las actividades realizadas por el equipo y mantener un registro. 
+Para mostar las actividades realizadas por el equipo y mantener un registro. 
 
 # Integrantes
 Jocelyn Janet Parés Ramos
