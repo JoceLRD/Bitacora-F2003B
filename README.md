@@ -2,6 +2,11 @@
 Bitacora de la materia de 
 
 # Integrantes
+Jocelyn Janet Parés Ramos
+Juan Pablo de la Vega Lozano
+Carlos Alberto Torre Sánchez 
+Ana Mamila Murillo Fernández
+Gael García Zúñiga
 
 # Instrucciones para cada entrada
 ## Formato
