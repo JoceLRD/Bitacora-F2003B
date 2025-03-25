@@ -1,9 +1,12 @@
 # Bitacora-F2003B
+
 Bitácora para la materia Modelación Numérica de Sistemas Físicos Determinísticos (Gpo. 502).
 
 En esta bitácora subiremos los avances cada vez que trabajemos en el proyecto, con el objetivo de hacer más sencilla, clara y eficiente la colaboración del equipo.
 
 Cada miembro podrá crear "issues" para señalar tareas pendientes o problemas específicos, de modo que todos estemos informados sobre qué hace falta hacer. Cualquier integrante del equipo puede resolver los issues, aunque no es obligatorio que todos participen en cada uno de ellos.
+Bitacora de la materia de sistemas fisicos deterministicos.
+Para mostar las actividades realizadas por el equipo y mantener un registro. 
 
 # Integrantes
 Jocelyn Janet Parés Ramos
