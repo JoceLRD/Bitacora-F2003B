@@ -1,0 +1,32 @@
+import matplotlib.pyplot as plt
+import numpy as np
+import matplotlib.animation as animation
+
+fig, ax = plt.subplots()
+t = np.linspace(0, 10,100)
+R = 5
+omega = 1
+z = R*np.cos(omega*t)
+z2 = R*np.sin(omega*t)
+
+scat = ax.scatter(z[0], z2[0], c="b", s=10, label=f'w = {omega} hertz')
+line2 = ax.plot(z[0], z2[0], label=f'w = {omega} hertz')[0]
+ax.set(xlim=[-5, 5], ylim=[-5, 5], xlabel='x axis [m]', ylabel='y axis [m]')
+ax.legend()
+
+
+def update(frame):
+    # for each frame, update the data stored on each artist.
+    x = z[:frame]
+    y = z2[:frame]
+    line2.set_xdata(z[:frame])
+    line2.set_ydata(z2[:frame])
+    # update the scatter plot:
+    data = np.stack([x, y]).T
+    scat.set_offsets(data)
+
+    return scat
+
+
+ani = animation.FuncAnimation(fig=fig, func=update, frames=100, interval=30)
+plt.show()
