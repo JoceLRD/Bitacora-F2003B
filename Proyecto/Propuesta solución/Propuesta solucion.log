@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (MiKTeX 24.4) (preloaded format=pdflatex 2024.8.18)  1 APR 2025 12:35
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (MiKTeX 24.4) (preloaded format=pdflatex 2024.8.18)  1 APR 2025 12:58
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -781,7 +781,7 @@ File: ot1ptm.fd 2001/06/04 font definitions for OT1/ptm.
 LaTeX Warning: Unused global option(s):
     [stu,floatsintext,draftfirst].
 
-No file "Propuesta solucion".aux.
+(Propuesta solucion.aux)
 \openout1 = `"Propuesta solucion.aux"'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 53.
@@ -804,6 +804,7 @@ LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 53.
 LaTeX Font Info:    ... okay on input line 53.
 LaTeX Info: Redefining \. on input line 53.
 LaTeX Info: Redefining \% on input line 53.
+
 
 Package siunitx Warning: Detected the "physics" package:
 (siunitx)                omitting definition of \qty.
@@ -912,7 +913,7 @@ So I'll assume that you meant to type \cr instead.
 [1
 
 {C:/Users/Usuario/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}{C:/Users/Usuario/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/base/8r.enc}]
-<Blades.png, id=13, 331.2375pt x 174.6525pt>
+<Blades.png, id=14, 331.2375pt x 174.6525pt>
 File: Blades.png Graphic file (type png)
 <use Blades.png>
 Package pdftex.def Info: Blades.png  used on input line 62.
@@ -924,7 +925,12 @@ pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has b
 <to be read again> 
                    \scan_stop: 
 l.94 \end{document}
-                    [1 <./Blades.png>] (Propuesta solucion.aux
+                    [1 <./Blades.png>]
+
+LaTeX Warning: Hook 'shipout/lastpage' executed on wrong page (1 not 2).
+               Rerun to correct this.
+
+(Propuesta solucion.aux
 LaTeX Info: Redefining \sptext on input line 10.
 LaTeX Info: Redefining \. on input line 10.
 LaTeX Info: Redefining \% on input line 10.
@@ -947,15 +953,15 @@ Package logreq Info: Writing requests to '"Propuesta solucion".run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 29931 strings out of 473899
- 629778 string characters out of 5725556
+ 29934 strings out of 473899
+ 630003 string characters out of 5725556
  1932960 words of memory out of 5000000
- 52517 multiletter control sequences out of 15000+600000
+ 52518 multiletter control sequences out of 15000+600000
  565721 words of font info for 54 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  75i,7n,93p,855b,2807s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <C:/Users/Usuario/AppData/Local/Programs/MiKTeX/fonts/type1/urw/times/utmr8a.pfb>
-Output written on "Propuesta solucion.pdf" (2 pages, 157429 bytes).
+Output written on "Propuesta solucion.pdf" (2 pages, 157399 bytes).
 PDF statistics:
  28 PDF objects out of 1000 (max. 8388607)
  2 named destinations out of 1000 (max. 500000)
