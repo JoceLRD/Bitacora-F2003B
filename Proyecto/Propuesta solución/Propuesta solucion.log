@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (MiKTeX 24.4) (preloaded format=pdflatex 2024.8.18)  31 MAR 2025 21:40
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (MiKTeX 24.4) (preloaded format=pdflatex 2024.8.18)  1 APR 2025 11:25
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -773,7 +773,7 @@ Package csquotes Info: Checking for multilingual support...
 Package csquotes Info: ... found 'babel' package.
 Package csquotes Info: Adjusting default style.
 Package csquotes Info: Redefining alias 'default' -> 'spanish'.
-LaTeX Font Info:    Trying to load font information for OT1+ptm on input line 47.
+LaTeX Font Info:    Trying to load font information for OT1+ptm on input line 53.
  (C:\Users\Usuario\AppData\Local\Programs\MiKTeX\tex/latex/psnfss\ot1ptm.fd
 File: ot1ptm.fd 2001/06/04 font definitions for OT1/ptm.
 )
@@ -784,26 +784,26 @@ LaTeX Warning: Unused global option(s):
 No file "Propuesta solucion".aux.
 \openout1 = `"Propuesta solucion.aux"'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 47.
-LaTeX Font Info:    ... okay on input line 47.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 47.
-LaTeX Font Info:    ... okay on input line 47.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 47.
-LaTeX Font Info:    ... okay on input line 47.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 47.
-LaTeX Font Info:    ... okay on input line 47.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 47.
-LaTeX Font Info:    ... okay on input line 47.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 47.
-LaTeX Font Info:    ... okay on input line 47.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 47.
-LaTeX Font Info:    ... okay on input line 47.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 47.
-LaTeX Font Info:    ... okay on input line 47.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 47.
-LaTeX Font Info:    ... okay on input line 47.
-LaTeX Info: Redefining \. on input line 47.
-LaTeX Info: Redefining \% on input line 47.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 53.
+LaTeX Font Info:    ... okay on input line 53.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 53.
+LaTeX Font Info:    ... okay on input line 53.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 53.
+LaTeX Font Info:    ... okay on input line 53.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 53.
+LaTeX Font Info:    ... okay on input line 53.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 53.
+LaTeX Font Info:    ... okay on input line 53.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 53.
+LaTeX Font Info:    ... okay on input line 53.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 53.
+LaTeX Font Info:    ... okay on input line 53.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 53.
+LaTeX Font Info:    ... okay on input line 53.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 53.
+LaTeX Font Info:    ... okay on input line 53.
+LaTeX Info: Redefining \. on input line 53.
+LaTeX Info: Redefining \% on input line 53.
 
 Package siunitx Warning: Detected the "physics" package:
 (siunitx)                omitting definition of \qty.
@@ -818,7 +818,7 @@ Package siunitx Warning: Detected the "physics" package:
 (C:\Users\Usuario\AppData\Local\Programs\MiKTeX\tex/latex/translations/dicts\translations-basic-dictionary-spanish.trsl
 File: translations-basic-dictionary-spanish.trsl (spanish translation file `translations-basic-dictionary')
 )
-Package translations Info: loading dictionary `translations-basic-dictionary' for `spanish'. on input line 47.
+Package translations Info: loading dictionary `translations-basic-dictionary' for `spanish'. on input line 53.
  (C:\Users\Usuario\AppData\Local\Programs\MiKTeX\tex/context/base/mkii\supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count500
@@ -838,7 +838,7 @@ Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 48
  (C:\Users\Usuario\AppData\Local\Programs\MiKTeX\tex/latex/00miktex\epstopdf-sys.cfg
 File: epstopdf-sys.cfg 2021/03/18 v2.0 Configuration of epstopdf for MiKTeX
 ))
-Package hyperref Info: Link coloring OFF on input line 47.
+Package hyperref Info: Link coloring OFF on input line 53.
 Package biblatex Info: Trying to load language 'spanish' -> 'spanish-apa'...
 Package biblatex Info: ... file 'spanish-apa.lbx' found.
  (C:\Users\Usuario\AppData\Local\Programs\MiKTeX\tex/latex/biblatex-apa\spanish-apa.lbx
@@ -861,20 +861,47 @@ Package biblatex Info: Automatic encoding selection.
 Package biblatex Info: Trying to load bibliographic data...
 Package biblatex Info: ... file '"Propuesta solucion".bbl' found.
  (Propuesta solucion.bbl)
-Package biblatex Info: Reference section=0 on input line 47.
-Package biblatex Info: Reference segment=0 on input line 47.
-LaTeX Font Info:    Trying to load font information for U+msa on input line 49.
+Package biblatex Info: Reference section=0 on input line 53.
+Package biblatex Info: Reference segment=0 on input line 53.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 55.
  (C:\Users\Usuario\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 49.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 55.
  (C:\Users\Usuario\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-c:/Users/Usuario/OneDrive - Instituto Tecnologico y de Estudios Superiores de Monterrey/Documents/GitHub/John-Moosee/Proyecto/Propuesta solución/Propuesta solucion.tex:49: Extra alignment tab has been changed to \cr.
+c:/Users/Usuario/OneDrive - Instituto Tecnologico y de Estudios Superiores de Monterrey/Documents/GitHub/John-Moosee/Proyecto/Propuesta solución/Propuesta solucion.tex:55: Extra alignment tab has been changed to \cr.
 <recently read> \endtemplate 
                              
-l.49 
+l.55 
+     
+You have given more \span or & marks than there were
+in the preamble to the \halign or \valign now in progress.
+So I'll assume that you meant to type \cr instead.
+
+c:/Users/Usuario/OneDrive - Instituto Tecnologico y de Estudios Superiores de Monterrey/Documents/GitHub/John-Moosee/Proyecto/Propuesta solución/Propuesta solucion.tex:55: Extra alignment tab has been changed to \cr.
+<recently read> \endtemplate 
+                             
+l.55 
+     
+You have given more \span or & marks than there were
+in the preamble to the \halign or \valign now in progress.
+So I'll assume that you meant to type \cr instead.
+
+c:/Users/Usuario/OneDrive - Instituto Tecnologico y de Estudios Superiores de Monterrey/Documents/GitHub/John-Moosee/Proyecto/Propuesta solución/Propuesta solucion.tex:55: Extra alignment tab has been changed to \cr.
+<recently read> \endtemplate 
+                             
+l.55 
+     
+You have given more \span or & marks than there were
+in the preamble to the \halign or \valign now in progress.
+So I'll assume that you meant to type \cr instead.
+
+c:/Users/Usuario/OneDrive - Instituto Tecnologico y de Estudios Superiores de Monterrey/Documents/GitHub/John-Moosee/Proyecto/Propuesta solución/Propuesta solucion.tex:55: Extra alignment tab has been changed to \cr.
+<recently read> \endtemplate 
+                             
+l.55 
      
 You have given more \span or & marks than there were
 in the preamble to the \halign or \valign now in progress.
@@ -890,7 +917,7 @@ So I'll assume that you meant to type \cr instead.
 pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has been already used, duplicate ignored
 <to be read again> 
                    \scan_stop: 
-l.71 \end{document}
+l.76 \end{document}
                     [1] (Propuesta solucion.aux
 LaTeX Info: Redefining \sptext on input line 10.
 LaTeX Info: Redefining \. on input line 10.
@@ -914,15 +941,15 @@ Package logreq Info: Writing requests to '"Propuesta solucion".run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 29917 strings out of 473899
- 629540 string characters out of 5725556
- 1929960 words of memory out of 5000000
- 52503 multiletter control sequences out of 15000+600000
+ 29916 strings out of 473899
+ 629507 string characters out of 5725556
+ 1930960 words of memory out of 5000000
+ 52502 multiletter control sequences out of 15000+600000
  565721 words of font info for 54 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  75i,7n,93p,855b,2807s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <C:/Users/Usuario/AppData/Local/Programs/MiKTeX/fonts/type1/urw/times/utmr8a.pfb>
-Output written on "Propuesta solucion.pdf" (2 pages, 31429 bytes).
+Output written on "Propuesta solucion.pdf" (2 pages, 32604 bytes).
 PDF statistics:
  25 PDF objects out of 1000 (max. 8388607)
  2 named destinations out of 1000 (max. 500000)
