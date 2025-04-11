@@ -13,6 +13,8 @@
 ### Libertad de Enfoque:
 - Tenemos **mucha libertad** de enfocarnos en lo que queramos.
 
+### Datos
+- Tenemos que tomar en cuenta que el tractor que arrastra la cortadora tiene **50 hp** y que a traves del PTO esa potencia llega a la cortadora. (Eso sera constante)
 ---
 
 
