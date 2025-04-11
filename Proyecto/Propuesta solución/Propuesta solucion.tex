@@ -56,38 +56,30 @@ pdflang=es-MX,
 El problema que pensamos resolver es el [\dots.]
  
 Nuestra estrategia para resolver el problema es el modelar el sistema de John Deere con el modelo HX10 con 2 cuchillas. Primero, se debe de hacer un análisis de la situación actual del sistema, para después hacer un análisis de los parámetros que se tienen que considerar para el modelo. Las cuchillas funcionan de la siguiente manera:
-
-\begin{figure}[H]
-   \centering
-   \includegraphics[width=0.5\textwidth]{Blades.png} 
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.5\textwidth]{diagrama.png}
+    \caption{Diagrama de nuestro modelo.}
+    \label{<label>}
 \end{figure}
-Las variables que tendríamos que considerar son:
-\begin{itemize}
-    \item La fuerza producida por el motor
-    \item La fuerza 
-    \item La eficiencia del motor
-    \item 
-\end{itemize}
-Por lo que haciendo un diagrama de fuerzas obtendriamos lo siguiente:
 
+Queremos encontar una función de $\theta$. Primero tenemos las siguientes variables:
+- $L$: La longitud de la cuchilla
+- $m$: La masa de la cuchilla
+- $R$: El radio del círculo
+- $P$: El punto en donde la cuchilla oscila con respecto al eje
+- $\Omega$: La velocidad angular del disco
+- $b$: El coeficiente de amortiguamiento (proporcional a la velocidad angular y la rotación del disco)
 
-Estrategia para resolver el problema
+$$
+\sum \tau = I \alpha 
+$$
 
-Prepara un documento de máximo dos páginas, describiendo la estrategia que usarán para resolver el problema.
+Primero encontramos el momento de incercia total, para esto sería obtener el momento de la cuchilla y el del círculo. Para una varilla el momento de incercia se define como:
 
-Incluye los siguientes puntos:
+$$
+I= \int_{\frac{-L}{2}}^{\frac{L}{2}}r^{2} \frac{M}{L}dr= \frac{M}{L} \frac{r^{3}}{3} \Big|
 
-Define el modelo que utilizarás. Usa figuras y diagramas para explicar tu estrategia.
-Define el investiga parámetros realistas para el modelo. No tienen que ser exactos, pero tienen que estar anclados en la realidad.
-Define cantidades a modelar y las ecuaciones que las gobiernan.
-Explica que estrategias usarán para resolver el problema.
- Modelo 
-
- Parámetros
-
- Cantidades y Ecuaciones
-
- Estrategias
 %REFERENCIAS----------------------------------------------------------------------------
 
 %\printbibliography
