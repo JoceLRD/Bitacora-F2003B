@@ -95,10 +95,6 @@ plt.grid(True)
 
 plt.show()
 
-# Supongamos que 'sol', 'R', 'r', 'L' ya están definidos en el entorno de la sesión
-phi    = sol.y[0]
-theta1 = sol.y[2]
-theta2 = sol.y[4]
 
 # Coordenadas del borde del disco
 x_disk = R * np.cos(phi)
