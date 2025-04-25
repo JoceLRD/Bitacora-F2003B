@@ -12,13 +12,13 @@ L = 0.8      # longitud de la cuchilla
 # ------------------------
 # Coeficientes ajustables
 # ------------------------
-b1 = 0.0           # densidad del pasto cuchilla 1
-b2 = b1           # densidad del pasto cuchilla 2
-c_disk = 0.0       # fricción viscosa del disco
-c_th1 = 0.0        # amortiguamiento pivote cuchilla 1
-c_th2 = 0.0        # amortiguamiento pivote cuchilla 2
-k1 = 0.0           # constante de resorte torsional cuchilla 1
-k2 = 0.0           # constante de resorte torsional cuchilla 2
+b1 = 0          # densidad del pasto cuchilla 1
+b2 = 10     # densidad del pasto cuchilla 2
+c_disk = 1       # fricción viscosa del disco
+c_th1 = 0        # amortiguamiento pivote cuchilla 1
+c_th2 = 0        # amortiguamiento pivote cuchilla 2
+k1 = 0           # constante de resorte torsional cuchilla 1
+k2 = 0           # constante de resorte torsional cuchilla 2
 theta01 = np.pi/2  # ángulo “full extend” cuchilla 1
 theta02 = np.pi/2  # ángulo “full extend” cuchilla 2
 
@@ -104,6 +104,39 @@ plt.figure()
 plt.scatter(x_tip2, y_tip2)
 plt.title('Trayectorias puntas de cuchilla 2')
 plt.axis('equal')
+plt.grid(True)
+
+plt.show()
+
+# -------------------- 
+# Extraer tiempo y ángulos de la solución
+t = sol.t
+phi    = sol.y[0]    # ángulo del disco
+theta1 = sol.y[2]    # ángulo cuchilla 1
+theta2 = sol.y[4]    # ángulo cuchilla 2
+
+# 1) φ(t)
+plt.figure()
+plt.plot(t, phi)
+plt.xlabel('Tiempo (s)')
+plt.ylabel('φ (rad)')
+plt.title('Ángulo del disco φ(t)')
+plt.grid(True)
+
+# 2) θ1(t)
+plt.figure()
+plt.plot(t, theta1)
+plt.xlabel('Tiempo (s)')
+plt.ylabel('θ₁ (rad)')
+plt.title('Ángulo cuchilla 1 θ₁(t)')
+plt.grid(True)
+
+# 3) θ2(t)
+plt.figure()
+plt.plot(t, theta2)
+plt.xlabel('Tiempo (s)')
+plt.ylabel('θ₂ (rad)')
+plt.title('Ángulo cuchilla 2 θ₂(t)')
 plt.grid(True)
 
 plt.show()
