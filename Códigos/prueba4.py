@@ -13,7 +13,7 @@ L = 0.8      # longitud de la cuchilla
 # Coeficientes ajustables
 # ------------------------
 b1 = 0          # densidad del pasto cuchilla 1
-b2 = 10     # densidad del pasto cuchilla 2
+b2 = 0     # densidad del pasto cuchilla 2
 c_disk = 1       # fricción viscosa del disco
 c_th1 = 0        # amortiguamiento pivote cuchilla 1
 c_th2 = 0        # amortiguamiento pivote cuchilla 2
