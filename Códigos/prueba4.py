@@ -13,7 +13,7 @@ L = 0.8      # longitud de la cuchilla
 # Coeficientes ajustables
 # ------------------------
 b1 = 0.0           # densidad del pasto cuchilla 1
-b2 = 0.0           # densidad del pasto cuchilla 2
+b2 = b1           # densidad del pasto cuchilla 2
 c_disk = 0.0       # fricción viscosa del disco
 c_th1 = 0.0        # amortiguamiento pivote cuchilla 1
 c_th2 = 0.0        # amortiguamiento pivote cuchilla 2
@@ -83,6 +83,7 @@ y_tip1 = y_piv + L * np.sin(phi + theta1)
 x_tip2 = x_piv + L * np.cos(phi + theta2)
 y_tip2 = y_piv + L * np.sin(phi + theta2)
 
+
 # 1) Borde del disco
 plt.figure()
 plt.scatter(x_disk, y_disk)
@@ -92,11 +93,17 @@ plt.grid(True)
 
 # 2) Puntas de las cuchillas
 plt.figure()
-plt.scatter(x_tip1, y_tip1, label='Punta cuchilla 1')
-plt.scatter(x_tip2, y_tip2, label='Punta cuchilla 2')
-plt.title('Trayectorias puntas de cuchillas')
+plt.scatter(x_tip1, y_tip1)
+plt.title('Trayectorias puntas de cuchilla 1')
 plt.axis('equal')
-plt.legend()
+plt.grid(True)
+
+plt.show()
+
+plt.figure()
+plt.scatter(x_tip2, y_tip2)
+plt.title('Trayectorias puntas de cuchilla 2')
+plt.axis('equal')
 plt.grid(True)
 
 plt.show()
