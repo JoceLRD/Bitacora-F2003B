@@ -1,0 +1,7 @@
+teniamos un problema con un codigo previamente hecho, el problema era que la trayectoria de las cuchillas y la unica manera en que esta podia tener esa trayectoria era que la longitud se hiciera mas chica.
+El probelma era que la densidad del pasto hiciera que su trayectoria no tuviera logica, y al quitar el pasto densidad= 0 y se comportaban como su la punta de la cuchilla se fuera al centro
+
+para resolverlo,
+Tambien hicimos varias pruebas para afinar el codigo y tuveria mucho mas sentido lo que haciamos.
+Empezamos a jugar con las diversas variables que tenemos como lo son densidad del pasto,fricción viscosa del disco
+amortiguamiento pivote cuchilla 1, amortiguamiento pivote cuchilla 2, constante de resorte torsional cuchilla 1, constante de resorte torsional cuchilla 2
