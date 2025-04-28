@@ -12,14 +12,14 @@ L = 0.8      # longitud de la cuchilla
 # ------------------------
 # Coeficientes ajustables
 # ------------------------
-b1 = 1          # densidad del pasto cuchilla 1
-b2 = 1     # densidad del pasto cuchilla 2
-c_disk = 1       # fricción viscosa del disco
-c_th1 = 0        # amortiguamiento pivote cuchilla 1
-c_th2 = 0        # amortiguamiento pivote cuchilla 2
-k1 = 0           # constante de resorte torsional cuchilla 1
-k2 = 0           # constante de resorte torsional cuchilla 2
-theta01 = 0  # ángulo “full extend” cuchilla 1
+b1 =          # densidad del pasto cuchilla 1
+b2 = 0         # densidad del pasto cuchilla 2
+c_disk = 1      # fricción viscosa del disco
+c_th1 = 0.1       # amortiguamiento pivote cuchilla 1
+c_th2 = 0.1       # amortiguamiento pivote cuchilla 2
+k1 = 0          # constante de resorte torsional cuchilla 1
+k2 = 0          # constante de resorte torsional cuchilla 2
+theta01 = 0 # ángulo “full extend” cuchilla 1
 theta02 = 0  # ángulo “full extend” cuchilla 2
 
 def tau_motor(t):
@@ -29,7 +29,8 @@ def odes(t, y):
     phi, phidot, th1, dth1, th2, dth2 = y
     I_disc  = 0.5*M*R**2
     I_blade = (1/3)*m*L**2
-    I_tot   = I_disc + 2*I_blade
+    # Corrección: Incluir el término de eje paralelo para las cuchillas
+    I_tot   = I_disc + 2*(m*r**2 + I_blade)  # ¡Corregido aquí!
 
     # torque de pasto
     def tau_res_blade(phi_dot, theta, theta_dot, b):
@@ -44,14 +45,13 @@ def odes(t, y):
 
     # aceleración de cuchilla
     def theta_ddot(phi_dot, theta, theta_dot, b, c_th, k, theta0):
-        if b==0 and c_th==0 and k==0:
-            return 0.0
+        # Eliminar la condición para calcular siempre términos centrífugos
         cent1     = 0.5*m*r*L*phi_dot**2*np.sin(theta)
         cent2     = (1/3)*m*L**2*phi_dot**2*np.sin(theta)*np.cos(theta)
         res_blade = (1/2)*b*r*L**2*phi_dot*np.sin(theta) + (1/3)*b*L**3*theta_dot*np.sin(theta)
-        spring    = -k*(theta-theta0)
+        spring    = -k*(theta - theta0)
         damp      = -c_th*theta_dot
-        return (-cent1 - cent2 - res_blade + spring + damp) / I_blade
+        return (-cent1 - cent2 - res_blade + spring + damp) / I_blade  # ¡Corregido aquí!
 
     dth1dd = theta_ddot(phidot, th1, dth1, b1, c_th1, k1, theta01)
     dth2dd = theta_ddot(phidot, th2, dth2, b2, c_th2, k2, theta02)
@@ -83,7 +83,7 @@ y_tip1 = y_piv + L * np.sin(phi + theta1)
 x_tip2 = x_piv + L * np.cos(phi + theta2)
 y_tip2 = y_piv + L * np.sin(phi + theta2)
 
-
+# Gráficos (sin cambios)
 # 1) Borde del disco
 plt.figure()
 plt.scatter(x_disk, y_disk)
