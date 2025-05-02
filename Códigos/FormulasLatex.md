@@ -1,3 +1,9 @@
+
+<!-- Incluir MathJax para renderizar LaTeX -->
+<script type="text/javascript" id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+</script>
+
 # Modelo de Disco Rotatorio con Cuchillas
 
 Este repositorio contiene el código para simular un disco con dos cuchillas sometidas a torques de fricción, resortes y amortiguamiento. A continuación se listan las principales ecuaciones y parámetros del modelo.
