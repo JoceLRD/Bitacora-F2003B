@@ -34,6 +34,10 @@ $$
 I_{blade}=\frac{1}{3}mL^2
 $$
 
+---
+
+## Torque que ejerce el pasto sobre el disco 
+
 $$
 \phi=b\dot\phi sen(\theta)(\frac{rL^2}{2}+(\frac{L^3}{3})cos(\theta))
 $$
@@ -43,6 +47,16 @@ $$
 $$
 
 ---
+
+## Torque que ejerce el pasto sobre la cuchilla 
+
+$$
+\tau_{cut}=b\dot\phi sen\theta \frac{rL^2}{2}
+$$
+
+$$
+\tau_{drag}=b\dot\theta sen\theta \frac{rL^3}{3}
+$$
 
 ## Torque del Motor
 
