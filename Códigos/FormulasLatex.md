@@ -36,6 +36,28 @@ $$
 
 ---
 
+## Torque que ejerce el pasto sobre el disco 
+
+$$
+\phi=b\dot\phi sen(\theta)(\frac{rL^2}{2}+(\frac{L^3}{3})cos(\theta))
+$$
+
+$$
+\theta=b\dot\theta sen\theta\frac{L^3}{3}
+$$
+
+---
+
+## Torque que ejerce el pasto sobre la cuchilla 
+
+$$
+\tau_{cut}=b\dot\phi sen\theta \frac{rL^2}{2}
+$$
+
+$$
+\tau_{drag}=b\dot\theta sen\theta \frac{rL^3}{3}
+$$
+
 ## Torque del Motor
 
 $$
