@@ -34,6 +34,10 @@ $$
 I_{blade}=\frac{1}{3}mL^2
 $$
 
+$$
+\phi=b\dot\phi sen(\theta)(\frac{rL^2}{2}+(\frac{L^3}{3})cos(\theta))
+$$
+
 ---
 
 ## Torque del Motor
