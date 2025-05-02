@@ -17,7 +17,7 @@ b2 = 1       # densidad de pasto cuchilla 2
 c_disk = 1     # fricción viscosa del disco
 c_th1 = 1    # amortiguamiento pivote cuchilla 1
 c_th2 = 0.1    # amortiguamiento pivote cuchilla 2
-k1 = 5.0         # constante de resorte torsional cuchilla 1
+k1 = 0         # constante de resorte torsional cuchilla 1
 k2 = 0         # constante de resorte torsional cuchilla 2
 theta01 = 3.14   # ángulo “full extend” cuchilla 1
 theta02 = 0    # ángulo “full extend” cuchilla 2
@@ -56,13 +56,12 @@ def theta_dd(phi_dot, theta, theta_dot, b, c_th, k, theta0):
     # torque de pasto sobre cuchilla
     tau_g = tau_blade_b(phi_dot, theta, theta_dot, b)
     # resorte y amortiguamiento
-    tau_s = -k * (theta - theta0)
     tau_d = -c_th * theta_dot
     # ecuación final
-    return (-cent1 - cent2 - tau_g + tau_s + tau_d) / I_blade
+    return (-cent1 - cent2 - tau_g + tau_d) / I_blade
 
 def odes(t, y):
-    phi, phidot, th1, dth1, th2, dth2 = y
+    phidot, th1, dth1, th2, dth2 = y
     I_tot = I_disc + 2*(m*r**2 + I_blade)
 
     # torques de pasto sobre el disco
@@ -73,8 +72,9 @@ def odes(t, y):
     phidd = (tau_motor(t) - t1 - t2 - c_disk*phidot) / I_tot
 
     # aceleraciones de las cuchillas
-    dth1dd = theta_dd(phidot, th1, dth1, b1, c_th1, k1, theta01)
-    dth2dd = theta_dd(phidot, th2, dth2, b2, c_th2, k2, theta02)
+    dth1dd = theta_dd(phidot, th1, dth1, b1, c_th1)
+    dth2dd = theta_dd(phidot, th2, dth2, b2, c_th2)
+
 
     return [phidot, phidd, dth1, dth1dd, dth2, dth2dd]
 

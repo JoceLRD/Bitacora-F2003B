@@ -1,18 +1,5 @@
 # Jocelyn
 
-Funciones del código
-- tau del tau_motor
-- tau del disco
-- tau cuchilla
-- theta 
-- odes
 
-```python
-def tau_disc_b(phi_dot, theta, theta_dot, b):
-    """
-    Torque que ejerce el pasto sobre el disco (reacción)
-    """
-    term_phi  = b * phi_dot   * np.sin(theta) * (r*L**2/2 + (L**3/3)*np.cos(theta))
-    term_th   = b * theta_dot * np.sin(theta) * (L**3/3)
-    return term_phi + term_th
-```
+integrar sobre el disco
+solucionadores de paso adativo
