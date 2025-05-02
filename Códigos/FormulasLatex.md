@@ -27,7 +27,7 @@ Este repositorio contiene el código para simular un disco con dos cuchillas som
 ## Momentos de Inercia
 
 $$
-\I_{disc}=\frac{1}{2}MR^2
+I_{disc}=\frac{1}{2}MR^2
 $$
 
 $$
