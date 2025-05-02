@@ -3,24 +3,22 @@ import matplotlib.pyplot as plt
 from scipy.integrate import solve_ivp
 
 # -- Parámetros del sistema (ajusta según tu modelo) --
-M = 5.0      # masa del disco
-m = 0.1      # masa de cada cuchilla
-R = 1.0      # radio del disco
-r = 0.8      # distancia pivote
-L = 0.8      # longitud de la cuchilla
+M = 20      # masa del disco
+m = 5      # masa de cada cuchilla
+R = 1.5      # radio del disco
+r = 1      # distancia pivote
+L = 0.3      # longitud de la cuchilla
 
 # ------------------------
 # Coeficientes ajustables
 # ------------------------
-b1 = 1e4     # densidad de pasto cuchilla 1
+b1 = 1e5     # densidad de pasto cuchilla 1
 b2 = 1       # densidad de pasto cuchilla 2
 c_disk = 1     # fricción viscosa del disco
 c_th1 = 1    # amortiguamiento pivote cuchilla 1
 c_th2 = 0.1    # amortiguamiento pivote cuchilla 2
-k1 = 0         # constante de resorte torsional cuchilla 1
-k2 = 0         # constante de resorte torsional cuchilla 2
-theta01 = 3.14   # ángulo “full extend” cuchilla 1
-theta02 = 0    # ángulo “full extend” cuchilla 2
+theta01 = np.pi/2 # ángulo “full extend” cuchilla 1
+theta02 = 1    # ángulo “full extend” cuchilla 2
 
 def tau_motor(t):
     return 2.0
@@ -45,7 +43,7 @@ def tau_blade_b(phi_dot, theta, theta_dot, b):
     term_drag = b * theta_dot * np.sin(theta) * (L**3/3)
     return term_cut + term_drag
 
-def theta_dd(phi_dot, theta, theta_dot, b, c_th, k, theta0):
+def theta_dd(phi_dot, theta, theta_dot, b, c_th):
     """
     Aceleración angular de la cuchilla:
       I_blade * θ¨ = -centrífugos - τ_blade_b - c_th*θ˙ - k*(θ-θ0)
@@ -61,7 +59,7 @@ def theta_dd(phi_dot, theta, theta_dot, b, c_th, k, theta0):
     return (-cent1 - cent2 - tau_g + tau_d) / I_blade
 
 def odes(t, y):
-    phidot, th1, dth1, th2, dth2 = y
+    phi,phidot, th1, dth1, th2, dth2 = y
     I_tot = I_disc + 2*(m*r**2 + I_blade)
 
     # torques de pasto sobre el disco
@@ -80,8 +78,16 @@ def odes(t, y):
 
 # Condiciones iniciales y resolución
 y0 = [0, 0, theta01, 0, theta02, 0]
-t_span = (0, 10)  # tiempo de simulación
-sol = solve_ivp(odes, t_span, y0, method='RK45')
+t_span = (0, 100)
+sol = solve_ivp(
+    fun=odes,          # callable compilado
+    t_span=t_span,
+    y0=y0,
+    method='RK45',           # explícito no rígido rápido
+    rtol=1e-2, atol=1e-5,     # rtol más laxo
+    max_step=0.5,            # evita pasos muy pequeños
+    dense_output=True        # para evaluar solo cuando lo necesites
+)
 
 # Extracción y gráficos (igual que antes
 # Extraer ángulos
