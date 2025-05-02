@@ -1,0 +1,76 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{geometry}
+\geometry{margin=2.5cm}
+
+\title{Modelo Físico de Disco Rotatorio con Cuchillas}
+\author{}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\section*{Fórmulas del Modelo Dinámico}
+
+Este modelo describe el movimiento de un disco rotatorio con dos cuchillas articuladas, considerando torques ejercidos por el motor, el pasto, fuerzas centrífugas, resortes de retorno y amortiguamiento viscoso.
+
+\subsection*{1. Momento de Inercia}
+
+\begin{align*}
+I_{\text{disc}} &= \frac{1}{2} M R^2 \quad \text{(Disco)} \\
+I_{\text{blade}} &= \frac{1}{3} m L^2 \quad \text{(Cuchilla)} \\
+I_{\text{tot}} &= I_{\text{disc}} + 2 \left( m r^2 + I_{\text{blade}} \right) \quad \text{(Sistema total)}
+\end{align*}
+
+\subsection*{2. Torque del Motor}
+
+\[
+\tau_{\text{motor}}(t) = f(t)
+\]
+
+\subsection*{3. Torque del Pasto sobre el Disco}
+
+\[
+\tau_{\text{disc\_b}} = b \, \dot{\phi} \, \sin(\theta) \left( \frac{rL^2}{2} + \frac{L^3}{3} \cos(\theta) \right) + b \, \dot{\theta} \, \sin(\theta) \left( \frac{L^3}{3} \right)
+\]
+
+\subsection*{4. Torque del Pasto sobre la Cuchilla}
+
+\[
+\tau_{\text{blade\_b}} = b \, \dot{\phi} \, \sin(\theta) \left( \frac{rL^2}{2} \right) + b \, \dot{\theta} \, \sin(\theta) \left( \frac{L^3}{3} \right)
+\]
+
+\subsection*{5. Torque Centrífugo sobre la Cuchilla}
+
+\[
+\tau_{\text{centrífugo}} = \frac{1}{2} m r L \dot{\phi}^2 \sin(\theta) + \frac{1}{3} m L^2 \dot{\phi}^2 \sin(\theta) \cos(\theta)
+\]
+
+\subsection*{6. Torque del Resorte}
+
+\[
+\tau_{\text{resorte}} = -k (\theta - \theta_0)
+\]
+
+\subsection*{7. Torque por Amortiguamiento}
+
+\[
+\tau_{\text{amortiguamiento}} = -c_{\theta} \, \dot{\theta}
+\]
+
+\subsection*{8. Ecuación de Movimiento del Disco}
+
+\[
+I_{\text{tot}} \, \ddot{\phi} = \tau_{\text{motor}} - \tau_{\text{disc\_b1}} - \tau_{\text{disc\_b2}} - c_{\text{disk}} \, \dot{\phi}
+\]
+
+\subsection*{9. Ecuación de Movimiento de una Cuchilla}
+
+\[
+I_{\text{blade}} \, \ddot{\theta} = -\tau_{\text{centrífugo}} - \tau_{\text{blade\_b}} - c_{\theta} \, \dot{\theta} - k(\theta - \theta_0)
+\]
+
+\end{document}
