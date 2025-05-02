@@ -31,7 +31,7 @@ I_{disc}=\frac{1}{2}MR^2
 $$
 
 $$
-I_{\mathrm{blade}} \;=\; \tfrac{1}{3}\,m\,L^2
+I_{blade}=\frac{1}{3}mL^2
 $$
 
 ---
