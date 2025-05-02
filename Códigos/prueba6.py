@@ -80,9 +80,14 @@ def odes(t, y):
 
 # Condiciones iniciales y resolución
 y0 = [0, 0, theta01, 0, theta02, 0]
-t_span = (0, 100)
-t_eval = np.linspace(*t_span, 1000)
-sol = solve_ivp(odes, t_span, y0, t_eval=t_eval)
+t_span = (0, 10)  # tiempo de simulación
+sol = solve_ivp(
+    odes, t_span, y0,
+    method='RK45',           # prueba también 'DOP853' o 'RK23'
+    rtol=1e-2, atol=1e-5,     # tolerancias más laxas
+    max_step=0.1,            # paso máximo (ajusta según tu escala de tiempo)
+    vectorized=False         # o True si tu odes admite vectores
+)
 
 # Extracción y gráficos (igual que antes
 # Extraer ángulos
