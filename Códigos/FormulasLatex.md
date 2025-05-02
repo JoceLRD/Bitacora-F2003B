@@ -38,6 +38,10 @@ $$
 \phi=b\dot\phi sen(\theta)(\frac{rL^2}{2}+(\frac{L^3}{3})cos(\theta))
 $$
 
+$$
+\theta=b\dot\theta sen\theta\frac{L^3}{3}
+$$
+
 ---
 
 ## Torque del Motor
