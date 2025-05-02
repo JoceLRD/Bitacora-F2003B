@@ -1,11 +1,11 @@
 # Fdb version 4
-["biber Propuesta solucion"] 1744518742.74878 "Propuesta solucion.bcf" "Propuesta solucion.bbl" "Propuesta solucion" 1744518898.10248 0
-  "Propuesta solucion.bcf" 1744518897 132791 7c82ba285c6a2066919f263a3b9ef01a "pdflatex"
+["biber Propuesta solucion"] 1744518742.74878 "Propuesta solucion.bcf" "Propuesta solucion.bbl" "Propuesta solucion" 1745598510.24933 0
+  "Propuesta solucion.bcf" 1745598509 132791 7c82ba285c6a2066919f263a3b9ef01a "pdflatex"
   (generated)
   "Propuesta solucion.bbl"
   "Propuesta solucion.blg"
   (rewritten before read)
-["pdflatex"] 1744518895.58854 "c:/Users/Usuario/OneDrive - Instituto Tecnologico y de Estudios Superiores de Monterrey/Documents/GitHub/John-Moosee/Proyecto/Propuesta solución/Propuesta solucion.tex" "Propuesta solucion.pdf" "Propuesta solucion" 1744518898.10401 2
+["pdflatex"] 1745598505.30199 "c:/Users/Usuario/OneDrive - Instituto Tecnologico y de Estudios Superiores de Monterrey/Documents/GitHub/John-Moosee/Proyecto/Propuesta solución/Propuesta solucion.tex" "Propuesta solucion.pdf" "Propuesta solucion" 1745598510.25112 2
   "C:/Users/Usuario/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map" 1744171453 87320 eefc49934c5d34a5de966cc4de89669f ""
   "C:/Users/Usuario/AppData/Local/MiKTeX/miktex/data/le/pdftex/pdflatex.fmt" 1723997302 24266277 d779b72e99ffb759af22f356b9026633 ""
   "C:/Users/Usuario/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/base/8r.enc" 1458473887 4993 80dc9bab7f31fb78a000ccfed0e27cab ""
@@ -143,11 +143,11 @@
   "C:/Users/Usuario/AppData/Local/Programs/MiKTeX/tex/latex/varwidth/varwidth.sty" 1238469540 10894 d359a13923460b2a73d4312d613554c8 ""
   "C:/Users/Usuario/AppData/Local/Programs/MiKTeX/tex/latex/xcolor/x11nam.def" 1700127522 9125 e0e22f8bd8f488926acdd4e96dcc4d1e ""
   "C:/Users/Usuario/AppData/Local/Programs/MiKTeX/tex/latex/xcolor/xcolor.sty" 1700127522 55487 80a65caedd3722f4c20a14a69e785d8f ""
-  "Propuesta solucion.aux" 1744518897 615 517bb1f66375c3279f22a4f72f8dc4d5 "pdflatex"
+  "Propuesta solucion.aux" 1745598509 615 517bb1f66375c3279f22a4f72f8dc4d5 "pdflatex"
   "Propuesta solucion.bbl" 1744518771 0 d41d8cd98f00b204e9800998ecf8427e "biber Propuesta solucion"
-  "Propuesta solucion.tex" 1744518891 10066 50f3cf15186c37b864732b799712bd21 ""
-  "c:/Users/Usuario/OneDrive - Instituto Tecnologico y de Estudios Superiores de Monterrey/Documents/GitHub/John-Moosee/Proyecto/Propuesta solución/Propuesta solucion.tex" 1744518891 10066 50f3cf15186c37b864732b799712bd21 ""
-  "diagrama.png" 1744394669 23084 17ff21b3999a8f8663dbecdc2b1a853d ""
+  "Propuesta solucion.tex" 1745598480 10115 7bd5c742c8210fd4318c5bccc306993a ""
+  "c:/Users/Usuario/OneDrive - Instituto Tecnologico y de Estudios Superiores de Monterrey/Documents/GitHub/John-Moosee/Proyecto/Propuesta solución/Propuesta solucion.tex" 1745598480 10115 7bd5c742c8210fd4318c5bccc306993a ""
+  "diagrama.png" 1745347393 23084 17ff21b3999a8f8663dbecdc2b1a853d ""
   (generated)
   "Propuesta solucion.aux"
   "Propuesta solucion.bcf"
