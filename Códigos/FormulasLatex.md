@@ -49,7 +49,16 @@ $$
 
 ---
 
+<!-- Incluir MathJax para renderizar LaTeX -->
+<script type="text/javascript" id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+</script>
+
+# Modelo de Disco Rotatorio con Cuchillas
+
 ## Torque del Pasto sobre el Disco
+
+Este bloque **debe** estar separado por líneas en blanco:
 
 $$
 \tau_{\mathrm{disc},b}
@@ -60,6 +69,8 @@ $$
 ---
 
 ## Torque del Pasto sobre la Cuchilla
+
+Asegúrate también de dejar un espacio en blanco alrededor:
 
 $$
 \tau_{\mathrm{blade},b}
@@ -72,6 +83,7 @@ $$
 ## Aceleración Angular de la Cuchilla
 
 Términos centrífugos:
+
 $$
 C_1 = \tfrac{1}{2}\,m\,r\,L\,\dot{\phi}^{2}\sin\!\theta
 \quad,\quad
@@ -79,6 +91,7 @@ C_2 = \tfrac{1}{3}\,m\,L^{2}\,\dot{\phi}^{2}\sin\!\theta\,\cos\!\theta
 $$
 
 Ecuación de movimiento:
+
 $$
 I_{\mathrm{blade}}\,\ddot{\theta}
 = -\,C_1 \;-\; C_2 \;-\;\tau_{\mathrm{blade},b}
@@ -87,6 +100,7 @@ I_{\mathrm{blade}}\,\ddot{\theta}
 $$
 
 o bien
+
 $$
 \ddot{\theta}
 = 
@@ -102,11 +116,12 @@ $$
 ## Ecuaciones de Movimiento del Sistema
 
 Definiendo
-\[
+
+$$
 y = [\phi,\;\dot{\phi},\;\theta_1,\;\dot{\theta}_1,\;\theta_2,\;\dot{\theta}_2]
 \quad,\quad
 I_{\mathrm{tot}} = I_{\mathrm{disc}} + 2\,\bigl(m\,r^2 + I_{\mathrm{blade}}\bigr)
-\]
+$$
 
 ### Disco
 
@@ -143,6 +158,7 @@ $$
   - k_2\,(\theta_2 - \theta_{02})
 }{I_{\mathrm{blade}}}
 $$
+
 
 ---
 
