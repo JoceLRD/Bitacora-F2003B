@@ -4,9 +4,9 @@
 
 Las **series de Chebyshev** y la **Transformada Rápida de Fourier** (FFT) se combinan en los llamados **métodos espectrales** para resolver ecuaciones diferenciales de forma muy eficiente.  
 - Una serie de Chebyshev aproxima una función \(f(x)\) en \([-1,1]\) como  
-  \[
-    f(x)\approx\sum_{n=0}^N a_n\,T_n(x),
-  \]  
+  $$  
+    f(x)\approx\sum_{n=0}^N a_n\,T_n(x),  
+  $$  
   donde \(T_n(x)=\cos\bigl(n\arccos(x)\bigr)\) es el polinomio de Chebyshev de grado \(n\).  
 - La FFT permite calcular los coeficientes \(\{a_n\}\) en \(\mathcal O(N\log N)\) en lugar de \(\mathcal O(N^2)\).
 
@@ -15,15 +15,15 @@ Las **series de Chebyshev** y la **Transformada Rápida de Fourier** (FFT) se co
 ## 1. Series de Chebyshev
 
 1. **Nodos de Chebyshev**:  
-   \[
-     x_j = \cos\Bigl(\tfrac{\pi j}{N}\Bigr),\quad j=0,\dots,N.
-   \]
+   $$  
+     x_j = \cos\Bigl(\frac{\pi j}{N}\Bigr),\quad j=0,\dots,N.  
+   $$
 2. **Interpolación**:  
-   Se muestrea \(f(x_j)\) y se obtiene un polinomio de grado \(N\) que coincide con \(f\) en los \(N+1\) nodos.
+   Se muestrea \(f(x_j)\) y se obtiene un polinomio de grado \(N\) que coincide con \(f\) en los \(N+1\) nodos.  
 3. **Coeficientes**:  
-   \[
-     a_n = \frac{2}{N}\sum_{j=0}^N{}^{\prime\prime} f(x_j)\cos\!\Bigl(\tfrac{\pi n j}{N}\Bigr),
-   \]  
+   $$  
+     a_n = \frac{2}{N}\sum_{j=0}^N{}^{\prime\prime} f(x_j)\cos\!\Bigl(\frac{\pi n j}{N}\Bigr),  
+   $$  
    donde las comillas dobles indican que el primer y último término van con peso \(1/2\).
 
 ---
@@ -37,26 +37,24 @@ Las **series de Chebyshev** y la **Transformada Rápida de Fourier** (FFT) se co
 
 ## 3. Métodos espectrales para EDOs
 
-Para resolver una ecuación diferencial (por ejemplo,
-\[
-  y''(x) - y(x) = g(x),\quad x\in[-1,1],\quad y(-1)=y(1)=0,
-\]
+Para resolver una ecuación diferencial (por ejemplo,  
+$$  
+  y''(x) - y(x) = g(x),\quad x\in[-1,1],\quad y(-1)=y(1)=0,  
+$$  
 ) se sigue el siguiente esquema:
 
 1. **Interpolación** de \(y\) en nodos de Chebyshev:  
-   \(y(x)\approx\sum_{n=0}^N a_n\,T_n(x)\).
+   $$  
+     y(x)\approx\sum_{n=0}^N a_n\,T_n(x).  
+   $$
 2. **Matrices de diferenciación**:  
    Construir la matriz \(D\in\mathbb R^{(N+1)\times(N+1)}\) tal que  
-   \[
-     (D\mathbf y)_j \approx y'(x_j),\quad (D^2\mathbf y)_j \approx y''(x_j).
-   \]
+   $$(D\mathbf y)_j \approx y'(x_j),\quad (D^2\mathbf y)_j \approx y''(x_j).$$
 3. **Sistema lineal**:  
-   En los **nodos interiores** \(j=1,\dots,N-1\),
-   \[
-     (D^2\mathbf y)_j - \mathbf y_j = g(x_j).
-   \]
+   En los **nodos interiores** \(j=1,\dots,N-1\),  
+   $$(D^2\mathbf y)_j - \mathbf y_j = g(x_j).$$
 4. **Condiciones de frontera**:  
-   Se imponen \(y(x_0)=y(x_N)=0\) eliminando las dos primeras ecuaciones y ajustando el sistema.
+   Se imponen \(y(x_0)=y(x_N)=0\) eliminando las dos primeras ecuaciones y ajustando el sistema.  
 5. **Resolución** de un sistema \((N-1)\times(N-1)\) en coeficientes \(\mathbf y\).
 
 ---
@@ -64,9 +62,9 @@ Para resolver una ecuación diferencial (por ejemplo,
 ## 4. Ejemplo resuelto
 
 **Problema**:  
-\[
-  y''(x) - y(x) = \sin(\pi x),\quad y(-1)=y(1)=0,\quad x\in[-1,1].
-\]
+$$  
+  y''(x) - y(x) = \sin(\pi x),\quad y(-1)=y(1)=0,\quad x\in[-1,1].  
+$$
 
 ### 4.1 Construcción de nodos y matriz de diferenciación
 
@@ -97,4 +95,3 @@ def cheb(N):
 N = 30
 D, x = cheb(N)
 D2 = D.dot(D)  # Segunda derivada
-
