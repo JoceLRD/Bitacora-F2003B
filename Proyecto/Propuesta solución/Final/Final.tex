@@ -9,7 +9,7 @@
 \UseTblrLibrary{booktabs}
 \usepackage{tablefootnote}
 \usepackage{graphicx}
-\usepackage{booktabs}
+\usepackage{booktabs,minted}
 \usepackage{array}
 \usepackage{ragged2e}
 \usepackage{pgffor}  
@@ -26,9 +26,199 @@
 
 \maketitle
 
-
+\section{Resumen}
 
 \section{Introducción}
+La eficiencia energética de la maquinaria, en cualquier sector, es clave para reducir costos y optimizar tiempos de operación. En este reporte analizaremos las cortadoras rotativas de césped John Deere, a partir de un modelo mecánico que describe el comportamiento de sus cuchillas bajo densidades de pasto variables. La dinámica de estas cuchillas, montadas en un disco giratorio, implica acoplamientos cinemáticos y de momento de inercia que exigen un tratamiento numérico preciso para capturar tanto los transitorios como las oscilaciones amortiguadas. Para ello, empleamos métodos espectrales y numéricos, en particular integradores de paso variable como RK45, que resultan eficaces para resolver sistemas acoplados de ecuaciones de segundo orden sin incurrir en elevados costos computacionales. Las ecuaciones que utilizamos para modelar el movimiento de cada cuchilla son:
 
+\section{Metodología}
+
+Se ha desarrollado un modelo matemático y computacional para simular el comportamiento dinámico de un sistema de corte rotatorio inspirado en el modelo HX10 de John Deere. El sistema consiste en un disco rotatorio al que se acoplan dos cuchillas en los extremos, las cuales interactúan con pasto durante su movimiento. Dado esto, se creó un código de Python para posteriormente obtener simulaciones del sistema. Las variables son las siguientes: 
+
+\begin{itemize}
+    \item \textbf{un disco de radio $R$:} 0.536 m
+    \item \textbf{una masa $M$ del disco:} 40.38 kg  
+    \item \textbf{un ángulo de rotación $\phi(t)$ del eje central del disco:} 0-2$\pi$ rad
+    \item \textbf{dos cuchillas de longitud $L$:} 0.54 m
+    \item \textbf{una masa $m$ de las cuchillas:} 5.33 kg
+    \item \textbf{los pivotes de las cuchillas a una distancia radial $r$:} 0.413 m
+    \item \textbf{un ángulo relativo de oscilación $\theta_i(t)$, con $i = 1, 2$:} 0-2$\pi$ rad
+\end{itemize}
+
+\subsection{Modelo analítico}
+El sistema se encuentra en un plano horizontal sin fricción con el suelo. Se considera fricción viscosa tanto en el eje del disco como en los pivotes de las cuchillas. La resistencia del pasto se modela como una fricción distribuida espacialmente, dependiente de la posición $(x, y)$ de las puntas de las cuchillas y se utiliza un torque constante $\tau_{motor}(t) = 2300$ Nmm aplicado al disco.
+
+Para las fuerzas se consideran las siguientes contribuciones de torque:
+
+\subsubsection{Torque por Fuerzas Centrífugas en las Cuchillas}
+Cada segmento diferencial de masa de una cuchilla sufre una aceleración centrífuga $a = (r + x \cos \theta) \dot{\phi}^2$, generando un torque de:
+
+$$
+\tau_{centr, i} = \frac{1}{2}mrL \dot{\phi}^2 \sin \theta_i + \frac{1}{3}mL^2 \dot{\phi}^2 \sin \theta_i \cos \theta_i.
+$$
+
+\subsubsection{Torque Viscoso del Pasto (Fricción)}
+El torque de resistencia debida al pasto sobre cada cuchilla considera dos componentes:
+
+ Por rotación del disco:
+  $\tau_{pasto,d,i} = b_i \dot{\phi} \sin \theta_i (r L^2 / 2)$
+Por rotación de la cuchilla:
+  $\tau_{pasto,th,i} = b_i \dot{\theta}_i \sin \theta_i (L^3 / 3)$
+
+Se define $b_i$ como un coeficiente local que depende de la posición de la punta de cada cuchilla en el campo espacial interpolado de densidad de pasto $\rho(x, y)$.
+
+\subsubsection{Torque Total sobre el Disco}
+El torque total que actúa sobre el disco se expresa como:
+
+$$
+I_{tot} \ddot{\phi} = \tau_{motor} - \sum_{i=1}^{2} (\tau_{pasto,d,i} + \tau_{pasto,th,i}) - c_{disk} \dot{\phi},
+$$
+
+donde $I_{tot} = I_{disco} + 2(I_{cuchilla} + m r^2)$, y $c_{disco}$ representa el coeficiente de amortiguamiento del disco.
+
+\subsubsection{Sistema de Ecuaciones Diferenciales}
+El sistema completo consiste en 6 variables dinámicas: $\phi, \dot{\phi}, \theta_1, \dot{\theta}_1, \theta_2, \dot{\theta}_2$. Se formula un sistema de ecuaciones diferenciales ordinarias (EDOs) de segundo orden, el cual se integra numéricamente utilizando \texttt{solve\_ivp} del paquete \textit{SciPy}
+
+\subsubsection{Campo Espacial de Fricción ($b(x,y)$)}
+Para capturar la variabilidad espacial de la resistencia del pasto se define una malla cartesiana sobre el plano $(x, y)$ del disco. Se prescribe una función de densidad $\rho(x, y) = 1 + 0.5 \sin\left(\frac{2\pi X}{R}\right) \cos\left(\frac{2\pi Y}{R}\right)$, no obstante se puede definir cualquier función de densidad. Se utiliza \texttt{RegularGridInterpolator} para interpolar valores de $\rho$ en coordenadas arbitrarias, y obtener el valor local de $b$ en cada instante de tiempo según la posición de la punta de cada cuchilla.
+
+\subsection{ Simulación Computacional}
+Se usó Python con las bibliotecas \texttt{NumPy}, \texttt{SciPy} y \texttt{Matplotlib}. Se definieron condiciones iniciales: $\phi(0) = 0$, $\dot{\phi}(0) = 0$, $\theta_1(0) = 0.1$, $\theta_2(0) = 1.0$, $\dot{\theta}_1(0) = \dot{\theta}_2(0) = 0$. El intervalo de simulación fue $t \in [0, 50]$ s. El código es el siguiente:
+
+\begin{minted}[fontsize=\footnotesize]{python}
+import numpy as np
+import matplotlib.pyplot as plt
+from scipy.integrate import solve_ivp
+from scipy.interpolate import RegularGridInterpolator
+
+# -- Parámetros del sistema --
+M = 40.38      # masa del disco
+m = 5.33       # masa de cada cuchilla
+R = 0.536     # radio del disco
+r = 0.413       # distancia pivote
+L = 0.54     # longitud de la cuchilla
+
+# Coeficientes base
+b1 = b2= 0.01     # coeficiente base cuchilla 1
+c_disk = 1   # fricción viscosa del disco
+c_th1 = c_th2 =9    # amortiguamiento pivote cuchilla 1
+
+theta01 = 0.1  # ángulo inicial cuchilla 1
+theta02 = 1        # ángulo inicial cuchilla 2
+
+# Función de torque del motor
+def tau_motor(t):
+    return 2300
+
+# Momentos de inercia
+I_disc  = 0.5 * M * R**2
+I_blade = (1/3) * m * L**2
+
+# Campo de densidad de pasto
+x_grid = np.linspace(-R, R, 200)
+y_grid = np.linspace(-R, R, 200)
+X, Y  = np.meshgrid(x_grid, y_grid)
+rho   = 1 + 0.5 * np.sin(2 * np.pi * X / R) * np.cos(2 * np.pi * Y / R)
+interpolator = RegularGridInterpolator((x_grid, y_grid), rho,
+                                       bounds_error=False, fill_value=1.0)
+
+def b_field(x_tip, y_tip, base_b):
+    return base_b * interpolator((x_tip, y_tip))
+
+# Definición de torques
+
+def tau_disc_b(phi_dot, theta, theta_dot, b):
+    term_phi  = b * phi_dot   * np.sin(theta) * (r*L**2/2 + (L**3/3)*np.cos(theta))
+    term_th   = b * theta_dot * np.sin(theta) * (L**3/3)
+    return term_phi + term_th
+
+
+def tau_blade_b(phi_dot, theta, theta_dot, b):
+    term_cut  = b * phi_dot   * np.sin(theta) * (r*L**2/2)
+    term_drag = b * theta_dot * np.sin(theta) * (L**3/3)
+    return term_cut + term_drag
+
+
+def theta_dd(phi_dot, theta, theta_dot, b, c_th):
+    cent1 = 0.5 * m * r * L * phi_dot**2 * np.sin(theta)
+    cent2 = (1/3) * m * L**2 * phi_dot**2 * np.sin(theta) * np.cos(theta)
+    tau_g = tau_blade_b(phi_dot, theta, theta_dot, b)
+    tau_d = -c_th * theta_dot
+    return (-cent1 - cent2 - tau_g + tau_d) / I_blade
+
+# Sistema de ecuaciones
+def odes(t, y):
+    phi, phidot, th1, dth1, th2, dth2 = y
+    I_tot = I_disc + 2*(m*r**2 + I_blade)
+
+    # Posiciones pivote y puntas
+    x_piv = r * np.cos(phi)
+    y_piv = r * np.sin(phi)
+    x_tip1 = x_piv + L * np.cos(phi + th1)
+    y_tip1 = y_piv + L * np.sin(phi + th1)
+    x_tip2 = x_piv + L * np.cos(phi + th2)
+    y_tip2 = y_piv + L * np.sin(phi + th2)
+
+    # Coeficientes locales
+    b1_loc = b_field(x_tip1, y_tip1, b1)
+    b2_loc = b_field(x_tip2, y_tip2, b2)
+
+    # Torques de pasto sobre el disco
+    t1 = tau_disc_b(phidot, th1, dth1, b1_loc)
+    t2 = tau_disc_b(phidot, th2, dth2, b2_loc)
+
+    # Ecuación del disco
+    phidd = (tau_motor(t) - t1 - t2 - c_disk*phidot) / I_tot
+
+    # Aceleraciones de las cuchillas
+    dth1dd = theta_dd(phidot, th1, dth1, b1_loc, c_th1)
+    dth2dd = theta_dd(phidot, th2, dth2, b2_loc, c_th2)
+
+    return [phidot, phidd, dth1, dth1dd, dth2, dth2dd]
+
+# Condiciones iniciales y resolución
+y0 = [0, 0, theta01, 0, theta02, 0]
+t_span = (0, 50)
+sol = solve_ivp(odes, t_span, y0, method='RK45',
+                rtol=1e-2, atol=1e-5, max_step=0.5)
+
+# Extracción de resultados
+t = sol.t
+phi      = sol.y[0]
+phi_dot  = sol.y[1]
+theta1   = sol.y[2]
+dth1     = sol.y[3]
+theta2   = sol.y[4]
+dth2     = sol.y[5]
+
+# Coordenadas disco y puntas
+x_disk = R * np.cos(phi)
+y_disk = R * np.sin(phi)
+x_piv  = r * np.cos(phi)
+y_piv  = r * np.sin(phi)
+x_tip1 = x_piv + L * np.cos(phi + theta1)
+y_tip1 = y_piv + L * np.sin(phi + theta1)
+x_tip2 = x_piv + L * np.cos(phi + theta2)
+y_tip2 = y_piv + L * np.sin(phi + theta2)
+\end{minted}
+
+El marco de simulación propuesto es replicable y puede servir como base para optimizar parámetros de diseño o evaluar estrategias de control del sistema de corte. 
+
+\section{Resultados}
+Al momento de correr el código, fue claro que el sistema programado era altamente propenso a dar resultados impredecibles e incomprensibles. Observamos que los resultados también variaban mucho dependiendo de los coeficientes base. Es por esta razón que experimentamos con los coeficientes hasta encontrar resultados que daban más sentido.\\
+
+Después de encontrar parámetros que daban los resultados esperados, obtuvimos las siguientes gráficas:
+
+En estas 3 imágenes, se observan los valores pertinentes al disco. En la primera figura, observamos el ángulo del disco con respecto al tiempo. Con esta información podemos concluir que el movimiento del disco tiene sentido. Cómo estamos midiendo su posición angular, cada 2pi valores cuenta como una rotación. De esto podríamos conseguir el número de rotaciones en cierto tiempo, lo cual es un dato importante para las personas que utilizan este tipo de tecnologías. 
+En la segunda imágen, se observa la trayectoria espacial del disco. Esta gráfica sirve más para corroborar que los resultados tengan sentido, y esta se ha mantenido consistente a lo largo de toda la experimentación con los valores, únicamente variando cuando reducimos el torque total de tal manera que no logra cubrir toda la trayectoria circular.
+La 3era gráfica demuestra la velocidad angular del disco con respecto al tiempo. Se observa que conforme más tiempo pasa, la tasa de crecimiento se reduce. Después de correr la simulación por más tiempo, observamos que esta velocidad se aproxima al valor del torque del motor. Este dato se puede utilizar para correr más simulaciones y saber como ajustar el motor. El único dato que modifica esta asíntota es el coeficiente de fricción viscosa del disco. Mientras más grande es, la asíntota baja a un valor menor.
+	Por otro lado, obtuvimos representaciones visuales del movimiento de las cuchillas. En este caso, el sistema que estamos graficando es el ángulo de la cuchilla con respecto a la normal del disco. En otras palabras, si la cuchilla esta perfectamente extendida, el ángulo sería 0. Conforme se mueve un poco en cualquier dirección, el ángulo debería de cambiar en su dirección respectiva. Adicionalmente, agregamos un ángulo inicial de 0.1, para que no tome mucho tiempo en estabilizarse el sistema. Aquí podemos observar las gráficas obtenidas:
+Primero, tenemos el ángulo de las cuchillas con respecto al tiempo. Se puede observar que la gráfica inicia en 0.1, lo cual se alinea con la condición inicial establecida. Después logra estabilizarse después de oscilar por muy poco tiempo. Esto puede parecer algo muy extremo, pero hay que tomar en cuenta que la velocidad de rotación del disco es muy alta. Esto haría que la fuerza centrífuga estabilice el sistema más rápido.
+	Por otro lado, está la trayectoria de la cuchilla. De la misma manera que la trayectoria del disco, esta gráfica sirve para verificar que el sistema funcione correctamente. Podemos observar que se ve muy similar a la otra trayectoria, pero los límites de la gráfica son mayores. Esto tiene sentido, ya que la distancia de las cuchillas al centro es mayor que la del disco por su propia cuenta.
+	Finalmente, tenemos la velocidad angular de la cuchilla con respecto al tiempo. En este caso, tenemos que la velocidad inicia en 0, pero al inicio varía mucho. Esto se debe a los cambios en posición que ocurren en el proceso de estabilización. El mismo momento que el ángulo llega a un estado estacionario, ocurre lo mismo en la velocidad, ya que a este punto no hay cambios significativos en la posición angular de la cuchilla, lo cual implica lo mismo de la velocidad.
+
+\section{Discusión}
+
+\section{Conclusión}
 
 \end{document}
