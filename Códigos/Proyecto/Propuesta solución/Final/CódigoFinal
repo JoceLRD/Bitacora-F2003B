@@ -1,0 +1,226 @@
+import numpy as np
+import matplotlib.pyplot as plt
+from scipy.integrate import solve_ivp
+from scipy.interpolate import RegularGridInterpolator
+
+# -- Parámetros del sistema (ajusta según tu modelo) --
+M = 40      # masa del disco
+m = 5       # masa de cada cuchilla
+R = 0.5     # radio del disco
+r = 0.4     # distancia pivote
+L = 0.5     # longitud de la cuchilla
+
+# ------------------------
+# Coeficientes base (valores iniciales que usaremos como referencia)
+# ------------------------
+b1_base = 0.5    # coeficiente base cuchilla 1
+b2_base = 0.5    # coeficiente base cuchilla 2
+c_disk_base = 1  # fricción viscosa del disco
+c_th1 = 10       # amortiguamiento pivote cuchilla 1
+c_th2 = 10       # amortiguamiento pivote cuchilla 2
+theta01 = 0.1    # ángulo inicial cuchilla 1
+theta02 = 0.1    # ángulo inicial cuchilla 2
+
+# Función de torque del motor
+def tau_motor(t):
+    return 2300
+
+# Momentos de inercia
+I_disc  = 0.5 * M * R**2
+I_blade = (1/3) * m * L**2
+
+# ------------------------
+# Campo de densidad de pasto
+# ------------------------
+x_grid = np.linspace(-R, R, 200)
+y_grid = np.linspace(-R, R, 200)
+X, Y  = np.meshgrid(x_grid, y_grid)
+rho   = 1 + 0.5 * np.sin(2 * np.pi * X / R) * np.cos(2 * np.pi * Y / R)
+interpolator = RegularGridInterpolator((x_grid, y_grid), rho, bounds_error=False, fill_value=1.0)
+
+def b_field(x_tip, y_tip, base_b):
+    return base_b * interpolator((x_tip, y_tip))
+
+# ------------------------
+# Definición de torques
+# ------------------------
+def tau_disc_b(phi_dot, theta, theta_dot, b):
+    term_phi  = b * phi_dot   * np.sin(theta) * (r*L*2/2 + (L*3/3)*np.cos(theta))
+    term_th   = b * theta_dot * np.sin(theta) * (L**3/3)
+    return term_phi + term_th
+
+def tau_blade_b(phi_dot, theta, theta_dot, b):
+    term_cut  = b * phi_dot   * np.sin(theta) * (r*L**2/2)
+    term_drag = b * theta_dot * np.sin(theta) * (L**3/3)
+    return term_cut + term_drag
+
+def theta_dd(phi_dot, theta, theta_dot, b, c_th):
+    cent1 = 0.5 * m * r * L * phi_dot**2 * np.sin(theta)
+    cent2 = (1/3) * m * L*2 * phi_dot*2 * np.sin(theta) * np.cos(theta)
+    tau_g = tau_blade_b(phi_dot, theta, theta_dot, b)
+    tau_d = -c_th * theta_dot
+    return (-cent1 - cent2 - tau_g + tau_d) / I_blade
+
+# ------------------------
+# Sistema de ecuaciones
+# ------------------------
+def odes(t, y, b1, b2, c_disk):
+    phi, phidot, th1, dth1, th2, dth2 = y
+    I_tot = I_disc + 2*(m*r**2 + I_blade)
+
+    # Posiciones pivote y puntas
+    x_piv = r * np.cos(phi)
+    y_piv = r * np.sin(phi)
+    x_tip1 = x_piv + L * np.cos(phi + th1)
+    y_tip1 = y_piv + L * np.sin(phi + th1)
+    x_tip2 = x_piv + L * np.cos(phi + th2)
+    y_tip2 = y_piv + L * np.sin(phi + th2)
+
+    # Coeficientes locales
+    b1_loc = b_field(x_tip1, y_tip1, b1)
+    b2_loc = b_field(x_tip2, y_tip2, b2)
+
+    # Torques de pasto sobre el disco
+    t1 = tau_disc_b(phidot, th1, dth1, b1_loc)
+    t2 = tau_disc_b(phidot, th2, dth2, b2_loc)
+
+    # Ecuación del disco
+    phidd = (tau_motor(t) - t1 - t2 - c_disk*phidot) / I_tot
+
+    # Aceleraciones de las cuchillas
+    dth1dd = theta_dd(phidot, th1, dth1, b1_loc, c_th1)
+    dth2dd = theta_dd(phidot, th2, dth2, b2_loc, c_th2)
+
+    return [phidot, phidd, dth1, dth1dd, dth2, dth2dd]
+
+# ------------------------
+# Condiciones iniciales
+# ------------------------
+y0 = [0, 0, theta01, 0, theta02, 0]
+t_span = (0, 30)
+
+# ------------------------
+# Listas de valores a variar
+# ------------------------
+b_values = [0.3, 0.5, 0.7]       # valores de coeficiente base b
+c_disk_values = [0.5, 1.0, 2.0]  # valores de fricción viscosa del disco
+
+# ------------------------
+# Ciclo para variar b y graficar velocidad angular vs torque
+# ------------------------
+plt.figure(figsize=(8, 6))
+for b_base in b_values:
+    # Usamos b_base tanto para b1 como para b2
+    sol = solve_ivp(lambda t, y: odes(t, y, b_base, b_base, c_disk_base),
+                    t_span, y0, method='RK45', rtol=1e-2, atol=1e-5, max_step=0.5)
+    t = sol.t
+    phi_dot = sol.y[1]
+    # Calculamos phidd en cada instante para obtener Torque_disco
+    phidd = np.array([odes(ti, yi, b_base, b_base, c_disk_base)[1] for ti, yi in zip(t, sol.y.T)])
+    Torque_disco = I_disc * phidd
+
+    plt.plot(phi_dot, Torque_disco, label=f'b={b_base}, c_disk={c_disk_base}')
+
+plt.xlabel("Velocidad angular $\dot{\\phi}$ (rad/s)")
+plt.ylabel("Torque del disco (Nm)")
+plt.title("Velocidad angular vs Torque del disco para distintos b")
+plt.legend()
+plt.grid(True)
+
+# ------------------------
+# Ciclo para variar c_disk y graficar velocidad angular vs torque
+# ------------------------
+plt.figure(figsize=(8, 6))
+for c_disk in c_disk_values:
+    sol = solve_ivp(lambda t, y: odes(t, y, b1_base, b2_base, c_disk),
+                    t_span, y0, method='RK45', rtol=1e-2, atol=1e-5, max_step=0.5)
+    t = sol.t
+    phi_dot = sol.y[1]
+    # Calculamos phidd en cada instante para obtener Torque_disco
+    phidd = np.array([odes(ti, yi, b1_base, b2_base, c_disk)[1] for ti, yi in zip(t, sol.y.T)])
+    Torque_disco = I_disc * phidd
+
+    plt.plot(phi_dot, Torque_disco, label=f'b1={b1_base}, b2={b2_base}, c_disk={c_disk}')
+
+plt.xlabel("Velocidad angular $\dot{\\phi}$ (rad/s)")
+plt.ylabel("Torque del disco (Nm)")
+plt.title("Velocidad angular vs Torque del disco para distintos c_disk")
+plt.legend()
+plt.grid(True)
+
+# ------------------------
+# Gráficas originales de ángulos y velocidades
+# ------------------------
+# (Se mantienen intactas sin cambios)
+sol_ref = solve_ivp(lambda t, y: odes(t, y, b1_base, b2_base, c_disk_base),
+                    t_span, y0, method='RK45', rtol=1e-2, atol=1e-5, max_step=0.5)
+t_ref = sol_ref.t
+phi_ref      = sol_ref.y[0]
+phi_dot_ref  = sol_ref.y[1]
+theta1_ref   = sol_ref.y[2]
+dth1_ref     = sol_ref.y[3]
+theta2_ref   = sol_ref.y[4]
+dth2_ref     = sol_ref.y[5]
+
+phidd_ref = np.array([odes(ti, yi, b1_base, b2_base, c_disk_base)[1] for ti, yi in zip(t_ref, sol_ref.y.T)])
+Torque_disco_ref = I_disc * phidd_ref
+
+x_disk = R * np.cos(phi_ref)
+y_disk = R * np.sin(phi_ref)
+x_piv  = r * np.cos(phi_ref)
+y_piv  = r * np.sin(phi_ref)
+x_tip1 = x_piv + L * np.cos(phi_ref + theta1_ref)
+y_tip1 = y_piv + L * np.sin(phi_ref + theta1_ref)
+x_tip2 = x_piv + L * np.cos(phi_ref + theta2_ref)
+y_tip2 = y_piv + L * np.sin(phi_ref + theta2_ref)
+
+plt.figure()
+plt.plot(t_ref, phi_ref)
+plt.xlabel('Tiempo (s)')
+plt.ylabel('φ (rad)')
+plt.title('Ángulo del disco φ(t)')
+plt.grid(True)
+
+plt.figure()
+plt.plot(t_ref, theta1_ref)
+plt.xlabel('Tiempo (s)')
+plt.ylabel('θ₁ (rad)')
+plt.title('Ángulo cuchilla 1 θ₁(t)')
+plt.grid(True)
+
+plt.figure()
+plt.plot(t_ref, theta2_ref)
+plt.xlabel('Tiempo (s)')
+plt.ylabel('θ₂ (rad)')
+plt.title('Ángulo cuchilla 2 θ₂(t)')
+plt.grid(True)
+
+plt.figure()
+plt.plot(t_ref, phi_dot_ref)
+plt.xlabel('Tiempo (s)')
+plt.ylabel(' (rad/s)')
+plt.title('Velocidad angular Disco')
+plt.grid(True)
+
+plt.figure()
+plt.plot(t_ref, dth1_ref)
+plt.xlabel('Tiempo (s)')
+plt.ylabel('θ̇₁ (rad/s)')
+plt.title('Velocidad angular cuchilla 1 θ̇₁(t)')
+plt.grid(True)
+
+plt.figure()
+plt.plot(t_ref, dth2_ref)
+plt.xlabel('Tiempo (s)')
+plt.ylabel('θ̇₂ (rad/s)')
+plt.title('Velocidad angular cuchilla 2 θ̇₂(t)')
+plt.grid(True)
+
+plt.figure()
+plt.plot(phi_dot_ref, Torque_disco_ref)
+plt.xlabel("Velocidad angular $\dot{\\phi}$ (rad/s)")
+plt.ylabel("Torque (Nm)")
+plt.title("Relación entre velocidad angular disco y Torque disco (coeficientes base)")
+plt.grid(True)
+
+plt.show()
